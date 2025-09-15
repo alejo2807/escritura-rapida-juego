@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="111.0" prefWidth="600.0" style="-fx-background-color: #007566;">
+         <children>
+            <Label alignment="TOP_CENTER" text="Ayuda/Reglas" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+            <Button alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="54.0" prefWidth="61.0" style="-fx-background-color: white;">
+                <HBox.margin>
+                  <Insets left="48.0" />
+               </HBox.margin>
+               <graphic>
+                    <ImageView fitHeight="42.0" fitWidth="43.0">
+                        <Image url="@homeIcon.png" />
+                    </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="37.0" layoutY="149.0" prefHeight="200.0" prefWidth="526.0">
+         <children>
+            <Label prefHeight="38.0" prefWidth="497.0" text="1. El juego trata de escribir la palabra/frase antes de que se acabe el tiempo.">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label prefHeight="36.0" prefWidth="424.0" text="2. Debes presionar la tecla &quot;enter&quot; para la respectiva validacion.">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="435.0" text="3. Si se acaba el tiempo y no enviaste la frase, perdiste la partida.">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label prefHeight="31.0" prefWidth="529.0" text="4.Si cometes un error, aun puedes superar el nivel antes de que acabe el tiempo.">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="511.0" text="5. Inicias con 20sg y cada 5 niveles, tu tiempo de respuesta se reduce en 2sg.">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

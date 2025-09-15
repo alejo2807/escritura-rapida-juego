@@ -12,17 +12,22 @@
          <children>
             <Label alignment="TOP_CENTER" graphicTextGap="12.0" text="˗ˏˋ ★ ˎˊ˗ Escritura Rapida ˗ˏˋ ★ ˎˊ˗" textFill="WHITE">
                <font>
-                  <Font name="Noto Serif Kannada Bold" size="32.0" />
+                  <Font name="System Bold" size="32.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <Button layoutX="235.0" layoutY="213.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" style="-fx-background-color: #007566; -fx-border-radius: 8; -fx-border-width: 3; -fx-border-color: #007566;" text="Jugar" textFill="WHITE">
+      <Button layoutX="235.0" layoutY="190.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" style="-fx-background-color: #007566; -fx-border-radius: 8; -fx-border-width: 3; -fx-border-color: #007566;" text="Jugar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="236.0" layoutY="278.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" style="-fx-background-color: #007566; -fx-border-radius: 8; -fx-border-width: 3;" text="Ayuda" textFill="WHITE">
+      <Button layoutX="236.0" layoutY="257.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" style="-fx-background-color: #007566; -fx-border-radius: 8; -fx-border-width: 3;" text="Ayuda" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="236.0" layoutY="323.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="131.0" style="-fx-background-color: #007566; -fx-border-radius: 8; -fx-border-width: 3;" text="Salir" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
