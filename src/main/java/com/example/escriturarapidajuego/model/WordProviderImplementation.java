@@ -6,7 +6,7 @@ import java.util.List;
 public class WordProviderImplementation implements  IWordProvider{
 
     //Words Bank
-    private List<String> wordList = new ArrayList<>();
+    protected final List<String> wordList = new ArrayList<>();
     private int currentWordIndex = 0;
 
     //Constructor
@@ -80,21 +80,16 @@ public class WordProviderImplementation implements  IWordProvider{
     @Override
     public String getNextWord()
     {
-
-        if(currentWordIndex < wordList.size())
-        {
-            String word = wordList.get(currentWordIndex);
-            currentWordIndex++;
-            deleteUsedWords(currentWordIndex);
-            return word;
+        if (currentWordIndex < wordList.size()) {
+            return wordList.get(currentWordIndex++);
+        } else {
+            return null;
         }
-        else return null;
     }
 
     @Override
-    public void deleteUsedWords(int currentWordIndex)
-    {
-        wordList.remove(currentWordIndex);
+    public boolean hasMoreWords() {
+        return currentWordIndex < wordList.size();
     }
 
 }
