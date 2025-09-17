@@ -25,7 +25,7 @@
                </HBox.margin>
                <graphic>
                     <ImageView fitHeight="42.0" fitWidth="43.0">
-                        <Image url="@images/homeIcon.png" />
+                        <Image url="@../../../../../resources/com/example/escriturarapidajuego/images/homeIcon.png" />
                     </ImageView>
                </graphic>
             </Button>
