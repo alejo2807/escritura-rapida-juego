@@ -1,5 +1,6 @@
 package com.example.escriturarapidajuego.model;
 
+import com.example.escriturarapidajuego.controller.GameController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
@@ -9,10 +10,19 @@ public class GameTimer {
     private Timeline timeline;
     private int timeLeft;
     private Label timeLabel;
+    private GameController gameController;
+
 
     public GameTimer(Label timeLabel) {
         this.timeLabel = timeLabel;
     }
+
+    // Nuevo constructor con GameController
+    public GameTimer(Label timeLabel, GameController gameController) {
+        this.timeLabel = timeLabel;
+        this.gameController = gameController;
+    }
+
 
     // Calcula el tiempo según el nivel
     private int calculateTimeForLevel(int level) {
@@ -37,13 +47,16 @@ public class GameTimer {
 
                     if (timeLeft <= 0) {
                         timeline.stop();
-                        timeLabel.setText("¡Se acabó el tiempo!");
-                        // Aquí podrías avisar al controlador del juego que se acabó el tiempo
+                        timeLabel.setText("Tiempo!");
+
+                        if(gameController != null){
+                            gameController.timeIsUp();
+                        }
                     }
                 })
         );
 
-        timeline.setCycleCount(timeLeft); // Repetir tantas veces como segundos iniciales
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 

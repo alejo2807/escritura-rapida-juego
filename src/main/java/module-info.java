@@ -1,6 +1,7 @@
 module com.example.escriturarapidajuego {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
 
     exports com.example.escriturarapidajuego;
 

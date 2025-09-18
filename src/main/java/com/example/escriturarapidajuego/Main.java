@@ -17,8 +17,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/escriturarapidajuego/view/home-view.fxml"));
         Scene scene = new Scene(loader.load());
-        //loader.setLocation(Main.class.getResource("view/game-view.fxml"));
-
 
         //Create the controller and passing it to the stage
         Controller controller = loader.getController();
@@ -26,6 +24,10 @@ public class Main extends Application {
 
         primaryStage.setTitle("Escritura Rapida");
         primaryStage.setScene(scene);
+
+        //We dont allow a redimension of thw window
+        primaryStage.setResizable(false);
+
         primaryStage.show();
 
     }

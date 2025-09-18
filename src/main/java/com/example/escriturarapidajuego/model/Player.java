@@ -40,12 +40,12 @@ public class Player  implements IPlayer{
 
     @Override
     public void increaseScore(int amount) {
-        score+=1;
+        score+=amount;
     }
 
     @Override
     public void decreaseScore(int amount) {
-        if (score > 0)  score -=1;
+        if (score > 0)  score -=amount;
         else score =0;
     }
 }
