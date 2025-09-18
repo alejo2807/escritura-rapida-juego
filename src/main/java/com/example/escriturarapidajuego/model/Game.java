@@ -18,16 +18,11 @@ public class Game {
         this.rules = new GameRules(wordProvider);
         this.timer = new GameTimer(timerLabel);
         this.currentLevel = 1;
-    }
 
-    // Inicia o reinicia la partida
-    public void startGame() {
-        this.player = new Player(0, 0, 0);  // reinicia estadísticas
-        this.wordProvider = new WordProviderImplementation(); // reinicia banco de palabras
-        this.rules = new GameRules(wordProvider);
-        this.currentLevel = 1;
+        //Each time we create a Game object, it would start the timer in the first level
         timer.startTimer(currentLevel);
     }
+
 
     // Valida la respuesta del usuario
     public boolean playTurn(String userAnswer) {
@@ -40,10 +35,6 @@ public class Game {
         } else {
             if(timer.isTimeOver()){
                 showResults();
-            }
-            else{
-                //we do nothing, since the user has the opportunity to continue typing
-                //while time is not equeal to zero (we dont level up either)
             }
         }
         return correct;

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GameController {
+public class Controller {
 
     @FXML
     private TextField inputAnswer; // TextField de la ventana de juego
@@ -99,8 +99,8 @@ public class GameController {
 
         // Pasa el stage al nuevo controlador
         Object controller = loader.getController();
-        if (controller instanceof GameController) {
-            ((GameController) controller).setStage(stage);
+        if (controller instanceof Controller) {
+            ((Controller) controller).setStage(stage);
         }
 
         stage.show();

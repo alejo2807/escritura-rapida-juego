@@ -21,7 +21,7 @@
       </HBox>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/sadFace.png" />
+            <Image url="@../../../../images/sadFace.png" />
          </image>
       </ImageView>
    </children>

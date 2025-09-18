@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="com.example.escriturarapidajuego.controller.GameController"
+<AnchorPane fx:controller="com.example.escriturarapidajuego.controller.Controller"
             onKeyPressed="#onEscapePressed"
             maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="400.0" prefWidth="651.0"
