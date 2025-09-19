@@ -1,5 +1,6 @@
 package com.example.escriturarapidajuego.controller;
 
+import com.example.escriturarapidajuego.Main;
 import com.example.escriturarapidajuego.model.Game;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -15,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class GameController {
 
@@ -31,13 +31,7 @@ public class GameController {
     @FXML
     private TextField inputField;
 
-    private Game game; // Modelo del juego
-
-    private Stage stage;
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+    private Game game; // Model of the Game
 
     @FXML
     public void initialize() {
@@ -47,18 +41,25 @@ public class GameController {
         // Configurar vista inicial
         updateView();
 
-        // Un solo listener para ENTER y ESCAPE
-        inputField.setOnKeyPressed(this::onKeyPressed);
+        // Un listener para ENTER
+        inputField.setOnKeyPressed(this::onEnterPressed);
     }
 
     @FXML
-    // Maneja tanto ENTER como ESCAPE
-    private void onKeyPressed(KeyEvent event) {
+    private void onEnterPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             handleEnter();
-        } else if (event.getCode() == KeyCode.ESCAPE) {
-            // Lógica de finalización del juego
+            event.consume();
+        }
+    }
+
+    private void endGame() {
+        if (game != null && game.getTimer() != null) {
+            game.getTimer().stopTimer();
+        }
+        if (game != null) {
             game.showResults();
+            showGameOver();
         }
     }
 
@@ -67,19 +68,18 @@ public class GameController {
         String typedWord = inputField.getText();
 
         if (!typedWord.isEmpty()) {
-            boolean correct = game.playTurn(typedWord);
+            boolean isCorrect = game.playTurn(typedWord);
 
 
-            if (correct) {
+            if (isCorrect) {
                 System.out.println("correct");
                 //in case the answer is correct, we show the correct view
-                showFeedback(correct);
+                showFeedback(isCorrect);
 
             } else {
                 System.out.println("incorrect");
                 //in case the answer is incorrect, we show the incorrect view
-                showFeedback(correct);
-
+                showFeedback(isCorrect);
             }
 
             inputField.clear();
@@ -89,24 +89,21 @@ public class GameController {
 
 
     // Show feedback and then return to game
-    private void showFeedback(boolean respuestaCorrecta) {
+    private void showFeedback(boolean isCorrectAnswer) {
         try {
-            String fxmlFile = respuestaCorrecta ? "/com/example/escriturarapidajuego/view/correct-view.fxml" : "/com/example/escriturarapidajuego/view/incorrect-view.fxml";
+            String fxmlFile = isCorrectAnswer ? "/com/example/escriturarapidajuego/view/correct-view.fxml" : "/com/example/escriturarapidajuego/view/incorrect-view.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
 
             // OBTENER EL CONTROLADOR
             FeedbackController feedbackController = loader.getController();
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle(respuestaCorrecta ? "Correcto" : "Incorrecto");
-            stage.setResizable(false);
+            Stage feedbackStage = new Stage();
+            feedbackStage.setScene(new Scene(root));
+            feedbackStage.setTitle(isCorrectAnswer ? "Correcto" : "Incorrecto");
+            feedbackStage.setResizable(false);
+            feedbackStage.show();
 
-            // ¡IMPORTANTE! Pasar el stage al controlador
-            feedbackController.setStage(stage);
-
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,27 +116,28 @@ public class GameController {
     }
 
 
-    public void timeIsUp() {
+    public void timeIsUp()
+    {
         // Tomar lo que el usuario haya escrito hasta el momento
         String userInput = inputField.getText();
 
         if (userInput.isEmpty()) {
             // Si no escribió nada - Game Over
             System.out.println("Tiempo agotado: No ingresó nada");
-            showFeedback(false); // ← Primero mostrar feedback de incorrecto
-            // Esperar un poco y luego mostrar game over
+            showFeedback(false); // at first, we show incorrect answer screen here
+
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(e -> showGameOver());
             pause.play();
-        } else
-        {
-            // Validar si lo que escribió es correcto
+        }
+        else {
             boolean isCorrect = game.playTurn(userInput);
 
-            if (isCorrect) {
+            if (isCorrect)
+            {
                 // if the user was corect, we advance to the next level
                 System.out.println("¡Acertó justo a tiempo! Pasando al siguiente nivel");
-                showFeedback(true); // ← Primero mostrar feedback de correcto
+                showFeedback(true); // we show positive feedback here
 
                 // Esperar un poco y luego continuar
                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -152,57 +150,38 @@ public class GameController {
                     }
                 });
                 pause.play();
-
-
-            } else {
+            }
+            else {
                 // Escribió algo pero incorrecto - Game Over
                 System.out.println("Tiempo agotado: Respuesta incorrecta");
-                showFeedback(false); // ← FALTABA ESTA LÍNEA
-                // Esperar y luego mostrar game over
+                showFeedback(false);
                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
                 pause.setOnFinished(e -> showGameOver());
                 pause.play();
+                endGame();
             }
         }
     }
 
-    private void showGameOver() {
-        game.showResults();
-
+    private void showGameOver()
+    {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/escriturarapidajuego/view/results-view.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador
-            ResultsController controller = loader.getController();
+            ResultsController resultsController = loader.getController();
 
-            // ELIMINA esta línea: controller.setStage(stage); //
-
-            // Crear NUEVO stage para resultados
-            Stage resultsStage = new Stage();
-            resultsStage.setScene(new Scene(root));
-            resultsStage.setTitle("Resultados");
-            resultsStage.setResizable(false);
-
-            // Pasar el NUEVO stage al controlador
-            controller.setStage(resultsStage);
-
-            // Pasar los datos
-            controller.updateResults(
-                    game.getPlayer().getScore(),
-                    game.getPlayer().getCorrectLevels(),
-                    game.getPlayer().getIncorrectLevels()
+            resultsController.updateResults(
+                game.getPlayer().getScore(),
+                game.getPlayer().getCorrectLevels(),
+                game.getPlayer().getIncorrectLevels()
             );
 
-            resultsStage.show();
-
-            Platform.runLater(() -> {
-                root.requestFocus();
-            });
-
-            // Cerrar ventana actual
-            Stage currentStage = (Stage) inputField.getScene().getWindow();
-            currentStage.close();
+            Stage primaryStage = Main.getPrimaryStage();
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setTitle("Resultados");
+            primaryStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();

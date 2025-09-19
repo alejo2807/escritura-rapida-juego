@@ -10,11 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="com.example.escriturarapidajuego.controller.ResultsController"
-            onKeyPressed="#onEscapePressed"
+<AnchorPane
             maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="400.0" prefWidth="651.0"
-            xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+            xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.escriturarapidajuego.controller.ResultsController"
+            onKeyPressed="#onEscapePressed">
    <children>
       <HBox alignment="CENTER" prefHeight="101.0" prefWidth="651.0" style="-fx-background-color: #007566;">
          <children>
@@ -25,7 +26,9 @@
             </Label>
          </children>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutX="141.0" layoutY="139.0" prefHeight="135.0" prefWidth="361.0" style="-fx-border-color: #007566; -fx-border-radius: 4; -fx-border-width: 4;" AnchorPane.topAnchor="139.0">
+      <VBox alignment="TOP_CENTER" layoutX="141.0" layoutY="139.0" prefHeight="135.0" prefWidth="361.0"
+            style="-fx-border-color: #007566; -fx-border-radius: 4; -fx-border-width: 4;"
+            AnchorPane.topAnchor="139.0">
          <children>
             <GridPane alignment="TOP_CENTER" prefHeight="110.0" prefWidth="333.0">
               <columnConstraints>
