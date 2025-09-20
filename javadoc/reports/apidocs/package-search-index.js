@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.escriturarapidajuego"},{"l":"com.example.escriturarapidajuego.controller"},{"l":"com.example.escriturarapidajuego.model"}];updateSearchResults();
